@@ -1,0 +1,50 @@
+.truck-img {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    width: 96px;
+    height: 96px;
+}
+::ng-deep .p-dataview {
+    padding: 3% 0%;
+}
+@media (min-width: 576px) {
+    ::ng-deep .p-dataview {
+        padding: 2% 5%;
+    }
+}
+.item-width {
+    width: 50%;
+}
+@media (min-width: 576px) {
+    .item-width {
+        width: 25%;
+    }
+}
+.dialog-width {
+    width: 100%;
+}
+::ng-deep .p-dialog .p-dialog-header {
+    background-color: white;
+    border: none;
+    font-size: medium;
+}
+::ng-deep body .p-dialog .p-dialog-content {
+    border: none;
+    color: #495057;
+    overflow-y: auto;
+}
+::ng-deep body .p-dialog .p-dialog-footer {
+    border: none;
+    padding: 1em 0em;
+}
+::ng-deep .p-button.p-button-icon-only.p-button-rounded.btn-circle {
+    border-radius: 50%;
+    height: 2.357rem;
+    width: 2.357rem;
+}
+::ng-deep body .pi {
+    font-size: 1em;
+}
+::ng-deep body .p-button {
+}

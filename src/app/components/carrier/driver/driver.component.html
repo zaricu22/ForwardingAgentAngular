@@ -1,0 +1,356 @@
+<!-- DATAVIEW -->
+<p-dataView [value]="driverArray" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
+    <p-header>
+        <div class="d-flex">
+            <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSort" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
+            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> {{ totalRecords }} </span>
+            <button pButton type="button" class="p-button-rounded p-button-info btn-circle align-self-center" icon="pi pi-plus" (click)="displayCreate()"></button>
+        </div>
+    </p-header>
+    <ng-template let-driver let-rowIndexValue="rowIndex" pTemplate="listItem">
+        <div class="w-100">
+            <div class="d-flex flex-wrap p-3">
+                <div class="order-1 order-md-1 item-width my-auto">
+                    <div class="driver-img">
+                        <img src="driver.slika" *ngIf="driver.slika != null" width="96px" height="96px" />
+                        <img src="../../../../assets/images/Driver.svg" width="96px" height="96px" *ngIf="driver.slika == null" />
+                    </div>
+                </div>
+                <div class="order-3 order-md-2 item-width mt-3 mt-md-0 d-flex flex-column">
+                    <h6>Osnovno</h6>
+                    <h5>{{ driver.ime }} {{ driver.prezime }}</h5>
+                    <div><i class="pi pi-map-marker"></i> {{ driver.adresa }}</div>
+                    <div><i class="pi pi-mobile"></i> {{ driver.telefon }}</div>
+                    <div><i class="pi pi-calendar-plus"></i> {{ driver.datumPridruzivanja | date: 'mediumDate' }}</div>
+                </div>
+                <div class="order-4 order-md-3 item-width mt-3 mt-md-0 my-auto d-flex flex-column align-items-end d-md-block">
+                    <h6>Iskustvo</h6>
+                    <div>{{ driver.godineIskustva }} god.</div>
+                    <div>{{ driver.satiVoznje }} h</div>
+                    <div>{{ driver.km }} km</div>
+                </div>
+                <div class="order-2 order-md-4 item-width my-auto d-flex">
+                    <div class="my-auto" *ngIf="driver.kamion != null || driver.prikolica != null">
+                        <h6>Vozila</h6>
+                        <button pButton type="button" class="p-button-info mx-1" icon="pi pi-share-alt" (click)="op.toggle($event); changeSelected(rowIndexValue)"></button>
+                    </div>
+                    <div class="ml-auto my-auto d-flex flex-column">
+                        <button pButton type="button" class="p-button-rounded p-button-warning btn-circle mb-1" icon="pi pi-pencil" (click)="displayEdit(rowIndexValue)"></button>
+                        <button pButton type="button" class="p-button-rounded p-button-danger btn-circle mt-1" icon="pi pi-trash" (click)="displayRemove(rowIndexValue)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<!-- CREATE DIALOG -->
+<p-dialog [(visible)]="displayCreateDialog" [modal]="true" class="dialog-width">
+    <p-header> Dodavanje </p-header>
+    <!-- CONTENT FORM -->
+    <div class="p-fluid">
+        <div class="p-field">
+            <label> <strong> Ime </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Prezime </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Adresa </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Telefon </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Datum Pridruzivanja </strong> </label> <br />
+            <button pButton type="button" class="p-button-info p-button-text w-100" (click)="opCalendar.toggle($event)" icon="false">
+                {{ dialogFieldDatumPridruzivanja | date: 'mediumDate' }}
+            </button>
+        </div>
+        <div class="p-field">
+            <label> <strong> Godine Iskustva </strong> </label> <br />
+            <p-inputNumber
+                class="btn-inputNum"
+                [min]="2000"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldGodineIskustva"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Sati Voznje </strong> </label> <br />
+            <p-inputNumber
+                [min]="0"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldSatiVoznje"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Km </strong> </label> <br />
+            <p-inputNumber
+                [min]="0"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldKm"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Slika </strong> </label> <br />
+            <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+        </div>
+        <div class="p-field">
+            <label> <strong> Kamion </strong> </label> <br />
+            <button pButton type="button" label="Izaberi..." (click)="truckList()"></button>
+            <span class="text-danger" *ngIf="selectedTrucks != null && selectedTrucks[0] != null">
+                ({{ selectedTrucks[0].model }} - {{ selectedTrucks[0].tip }})
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = null" class="p-button-text p-button-rounded p-button-danger"></button>
+            </span>
+        </div>
+        <div class="p-field">
+            <label> <strong> Prikolica </strong> </label> <br />
+            <button pButton type="button" label="Izaberi..." (click)="trailerList()"></button>
+            <span class="text-danger" *ngIf="selectedTrailers != null && selectedTrailers[0] != null">
+                ({{ selectedTrailers[0].model }} - {{ selectedTrailers[0].tip }})
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = null" class="p-button-text p-button-rounded p-button-danger"></button>
+            </span>
+        </div>
+    </div>
+    <!-- FOOTER BUTTONS -->
+    <p-footer>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button pButton type="button" class="p-button-outlined p-button-info" icon="pi pi-check" label="Unesi" (click)="createDriver()"></button>
+                <button pButton type="button" class="p-button-text p-button-secondary" icon="pi pi-times" label="Otkaz" (click)="hideCreate()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<!-- EDIT DIALOG -->
+<p-dialog [(visible)]="displayEditDialog" [modal]="true" class="dialog-width">
+    <p-header> Izmena </p-header>
+    <!-- CONTENT FORM -->
+    <div class="p-fluid">
+        <div class="p-field">
+            <label> <strong> Ime </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Prezime </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Adresa </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Telefon </strong> </label> <br />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" required />
+        </div>
+        <div class="p-field">
+            <label> <strong> Datum Pridruzivanja </strong> </label> <br />
+            <button pButton type="button" class="p-button-info p-button-text w-100" (click)="opCalendar.toggle($event)" icon="false">
+                {{ dialogFieldDatumPridruzivanja | date: 'mediumDate' }}
+            </button>
+        </div>
+        <div class="p-field">
+            <label> <strong> Godine Iskustva </strong> </label> <br />
+            <p-inputNumber
+                class="btn-inputNum"
+                [min]="2000"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldGodineIskustva"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Sati Voznje </strong> </label> <br />
+            <p-inputNumber
+                [min]="0"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldSatiVoznje"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Km </strong> </label> <br />
+            <p-inputNumber
+                [min]="0"
+                [showButtons]="true"
+                buttonLayout="stacked"
+                decrementButtonClass="p-button-info"
+                decrementButtonIcon="pi pi-angle-down"
+                incrementButtonClass="p-button-info"
+                incrementButtonIcon="pi pi-angle-up"
+                [(ngModel)]="dialogFieldKm"
+                required
+            ></p-inputNumber>
+        </div>
+        <div class="p-field">
+            <label> <strong> Slika </strong> </label> <br />
+            <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+        </div>
+        <div class="p-field">
+            <label> <strong> Kamion </strong> </label> <br />
+            <button pButton type="button" label="Izaberi..." (click)="truckList()"></button>
+            <span class="text-danger" *ngIf="selectedTrucks != null && selectedTrucks[0] != null">
+                ({{ selectedTrucks[0].model }} - {{ selectedTrucks[0].tip }})
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = null" class="p-button-text p-button-rounded p-button-danger"></button>
+            </span>
+        </div>
+        <div class="p-field">
+            <label> <strong> Prikolica </strong> </label> <br />
+            <button pButton type="button" label="Izaberi..." (click)="trailerList()"></button>
+            <span class="text-danger" *ngIf="selectedTrailers != null && selectedTrailers[0] != null">
+                ({{ selectedTrailers[0].model }} - {{ selectedTrailers[0].tip }})
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = null" class="p-button-text p-button-rounded p-button-danger"></button>
+            </span>
+        </div>
+    </div>
+    <!-- FOOTER BUTTONS -->
+    <p-footer>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button pButton type="button" class="p-button-outlined p-button-info" icon="pi pi-check-circle" label="Izmeni" (click)="updateDriver()"></button>
+                <button pButton type="button" class="p-button-text p-button-secondary" icon="pi pi-times" label="Otkaz" (click)="hideEdit()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<!-- REMOVE DIALOG -->
+<p-dialog [(visible)]="displayRemoveDialog" [modal]="true" class="dialog-width">
+    <p-header> Brisanje </p-header>
+    <strong> Da li sigurno želite da obrišete? </strong>
+    <p-footer>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button pButton type="button" class="p-button-outlined p-button-danger" icon="pi pi-exclamation-triangle" label="Da" (click)="deleteDriver()"></button>
+                <button pButton type="button" class="p-button-text p-button-secondary" icon="pi pi-times" label="Ne" (click)="hideRemove()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<!-- TRUCK LIST DIALOG -->
+<p-dialog [(visible)]="displayTruckList" [modal]="true">
+    <p-orderList [value]="truckArray" [(selection)]="selectedTrucks">
+        <ng-template let-truck pTemplate="item">
+            <div class="d-flex">
+                <img src="truck.slika" *ngIf="truck.slika != null" width="96px" height="96px" />
+                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="truck.slika == null" />
+                <div>
+                    <b>Model:</b> {{ truck.model }} <br />
+                    <b>Tip:</b> {{ truck.tip }} <br />
+                    <b>Nosivost:</b> {{ truck.nosivost }} <br />
+                    <b>Km:</b> {{ truck.km }} <br />
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+    <p-footer>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button pButton type="button" class="p-button-outlined p-button-info" label="Zatvori" (click)="hideTruckList()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<!-- TRAILER LIST DIALOG -->
+<p-dialog [(visible)]="displayTrailerList" [modal]="true">
+    <p-orderList [value]="trailerArray" [(selection)]="selectedTrailers">
+        <ng-template let-trailer pTemplate="item">
+            <div class="d-flex">
+                <img src="trailer.slika" *ngIf="trailer.slika != null" width="96px" height="96px" />
+                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="trailer.slika == null" />
+                <div>
+                    <b>Model:</b> {{ trailer.model }} <br />
+                    <b>Tip:</b> {{ trailer.tip }} <br />
+                    <b>Nosivost:</b> {{ trailer.nosivost }} <br />
+                    <b>Km:</b> {{ trailer.km }} <br />
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+    <p-footer>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button pButton type="button" class="p-button-outlined p-button-info" label="Zatvori" (click)="hideTrailerList()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<!-- OVERLAYPANEL -->
+<p-overlayPanel #op showCloseIcon="true">
+    <ng-template pTemplate>
+        <div *ngIf="driverArray[selectedRow] != null && driverArray[selectedRow].kamion != null" class="d-flex">
+            <div class="truck-img">
+                <img src="driverArray[selectedRow].kamion.slika" *ngIf="driverArray[selectedRow].kamion.slika != null" width="96px" height="96px" />
+                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="driverArray[selectedRow].kamion.slika == null" />
+            </div>
+            <div class="pl-3">
+                <b>Model:</b> {{ driverArray[selectedRow].kamion.model }} <br />
+                <b>Tip:</b> {{ driverArray[selectedRow].kamion.tip }} <br />
+                <b>Nosivost:</b> {{ driverArray[selectedRow].kamion.nosivost }} <br />
+                <b>Km:</b> {{ driverArray[selectedRow].kamion.km }} <br />
+            </div>
+        </div>
+        <div *ngIf="driverArray[selectedRow] != null && driverArray[selectedRow].prikolica != null" class="d-flex mt-3">
+            <div class="trailer-img">
+                <img src="driverArray[selectedRow].prikolica.slika" *ngIf="driverArray[selectedRow].prikolica.slika != null" width="96px" height="96px" />
+                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="driverArray[selectedRow].prikolica.slika == null" />
+            </div>
+            <div class="pl-3">
+                <b>Model:</b> {{ driverArray[selectedRow].prikolica.model }} <br />
+                <b>Tip:</b> {{ driverArray[selectedRow].prikolica.tip }} <br />
+                <b>Nosivost:</b> {{ driverArray[selectedRow].prikolica.nosivost }} <br />
+                <b>Km:</b> {{ driverArray[selectedRow].prikolica.km }} <br />
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<!-- OVERLAYPANEL -->
+<p-overlayPanel #opCalendar>
+    <ng-template pTemplate>
+        <div class="p-field">
+            <label> <strong> Datum Pridruzivanja </strong> </label> <br />
+            <p-calendar [(ngModel)]="dialogFieldDatumPridruzivanja" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<!-- TOAST -->
+<p-toast position="bottom-center"></p-toast>

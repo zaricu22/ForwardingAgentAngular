@@ -1,0 +1,72 @@
+<!-- DATAVIEW -->
+<p-dataView [value]="trailers" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
+    <p-header>
+        <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSort" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
+    </p-header>
+    <ng-template let-trailer let-rowIndexValue="rowIndex" pTemplate="listItem">
+        <div class="w-100">
+            <div class="d-flex flex-wrap p-3">
+                <div class="order-1 order-md-1 item-width">
+                    <div class="trailer-img">
+                        <img src="trailer.slika" *ngIf="trailer.slika != null" width="96px" height="96px" />
+                        <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="trailer.slika == null" />
+                    </div>
+                </div>
+                <div class="order-3 order-md-2 item-width my-auto">
+                    <h6>Osnovno</h6>
+                    <h5>{{ trailer.model }}</h5>
+                    <div><i class="pi pi-tags"></i> {{ trailer.tip }}</div>
+                </div>
+                <div class="order-4 order-md-3 item-width mt-3 mt-md-0 d-flex flex-column align-items-end d-md-block">
+                    <h6>Karakteristike</h6>
+                    <div>{{ trailer.godinaProizvodnje }} god.</div>
+                    <div>{{ trailer.nosivost }}t</div>
+                    <div
+                        [ngClass]="{
+                            'text-success': trailer.km > 0,
+                            'text-info': trailer.km > 50000,
+                            'text-warning': trailer.km > 100000,
+                            'text-danger': trailer.km > 150000
+                        }"
+                    >
+                        {{ trailer.km }}km
+                    </div>
+                </div>
+                <div class="order-2 order-md-4 item-width my-auto d-flex flex-column align-items-end text-center">
+                    <div class="mr-3"><b>Prevoznik</b> <br /></div>
+                    <button pButton type="button" label="{{ trailer.prevoznik.naziv }}" (click)="showDialog(rowIndexValue); op.toggle($event)" class="p-button-link"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-overlayPanel #op showCloseIcon="true">
+    <ng-template pTemplate>
+        <div>
+            <b> Naziv: </b> {{ trailers[selectedRow].prevoznik.naziv }} <br />
+            <b> Sediste: </b> {{ trailers[selectedRow].prevoznik.sediste }} <br />
+            <b> E-mail: </b> {{ trailers[selectedRow].prevoznik.email }} <br />
+            <b> Telefon: </b> {{ trailers[selectedRow].prevoznik.telefon }} <br />
+            <b> Reputacija isporuka:</b>
+            <span class="text-success">
+                {{ trailers[selectedRow].prevoznik.uspesneIsporuke }}
+            </span>
+            /
+            <span class="text-danger">
+                {{ trailers[selectedRow].prevoznik.neuspesneIsporuke }}
+            </span>
+            (
+            <span class="text-info">
+                {{
+                    (trailers[selectedRow].prevoznik.uspesneIsporuke / (trailers[selectedRow].prevoznik.uspesneIsporuke + trailers[selectedRow].prevoznik.neuspesneIsporuke)) * 100
+                }}%
+            </span>
+            )
+            <br />
+            <div class="mt-2">
+                <p-rating [ngModel]="carrierStars" readonly="true" [cancel]="false"></p-rating>
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>

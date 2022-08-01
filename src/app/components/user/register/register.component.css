@@ -1,0 +1,9 @@
+::ng-deep .p-steps-item {
+    width: 50%;
+}
+::ng-deep body .pi {
+    font-size: 1em;
+}
+::ng-deep .p-card-footer {
+    padding-top: 0;
+}
