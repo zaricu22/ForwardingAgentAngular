@@ -4,7 +4,7 @@ A system provide platform for associating manufacturers with corresponding carri
 It should be seen as advertisement platform which provide review of supply and demand of each company,
 its purpose is not to conclude agreements between two sides but to bring the two sides closer. 
 It is web-oriented application system with Angular front-end interface which 
-access to services and MySQL database has offered through Spring back-end module.  
+access to services and MySQL database has offered through Spring back-end module.
 Simple preview of web application user interface and features can be seen in <a href="./Images">'Images'</a> folder.
 
 Primary users of the system are companies where a certain information can be made available to their employees. 
