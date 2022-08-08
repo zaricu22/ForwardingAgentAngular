@@ -12,7 +12,7 @@ Front-end unit contains four components (register and login page, landing page, 
 Each carrier registered on the platform has own reputation examined from its shipments history. 
 The manufacturer can search over the truck and trailer base to find the vehicle with certain characteristics and its
 carrier contact information and reputation. 
-The carrier may review a cargos from each manufacurer that wait on the shipping process.
+On the other hand, the carrier should be able to review a cargos from each manufacurer that wait on the shipping process.
 Both company types may use corresponding delivery records from database which offers data about cargo type, payment and completion status of particular delivery. 
 
 The platform supply manageble base of a drivers and vehicles to each registered carrier company.
