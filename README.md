@@ -17,8 +17,8 @@ carrier contact information and reputation.
 On the other hand, the carrier should be able to review a cargos from each manufacturer that wait on the shipping process. 
 Both company types may use corresponding delivery records from database which offers data about cargo type, payment or completion status, and other details about particular delivery. 
 
-The platform supply manageable base of a drivers and vehicles to each registered carrier company. </br>
-A individual driver may have record of assigned vehicles. </br>
-It also provide information about vehicle age status and driver experience. </br>
-Each driver has its own delivery history as major parameters of its work. </br>
+The platform supply manageable base of a drivers and vehicles to each registered carrier company. 
+A individual driver may have record of assigned vehicles. 
+It also provide information about vehicle age status and driver experience.
+Each driver has its own delivery history as major parameters of its work. 
 
