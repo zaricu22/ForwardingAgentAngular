@@ -5,7 +5,7 @@ It should be seen as advertisement platform which provide review of supply and d
 its purpose is not to conclude agreements between two sides but to bring the two sides closer. </br>
 It is web-oriented application system with Angular front-end interface which 
 access to services and MySQL database has offered through Spring back-end module.  </br>
-How can run and images...
+Simple preview of web application user interface and features can be seen in <a href="./Images">'Images'</a> folder.
 
 Primary users of the system are companies where a certain information can be made available to their employees. </br>
 The user interface of Angular web app is based on Bootstrap and PrimeNG dependencies. </br>
