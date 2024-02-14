@@ -1,13 +1,13 @@
 import { Teret } from './../../interfaces/model/teret';
 import { Proizvodjac } from './../../interfaces/model/proizvodjac';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../../src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Kamion } from 'src/app/interfaces/model/kamion';
-import { Prikolica } from 'src/app/interfaces/model/prikolica';
-import { Isporuka } from 'src/app/interfaces/model/isporuka';
-import { Vozac } from 'src/app/interfaces/model/vozac';
+import { Kamion } from './../../interfaces/model/kamion';
+import { Prikolica } from './../../interfaces/model/prikolica';
+import { Isporuka } from './../../interfaces/model/isporuka';
+import { Vozac } from './../../interfaces/model/vozac';
 
 @Injectable({
     providedIn: 'root'
@@ -69,8 +69,8 @@ export class ManuService {
         return this.http.get<Vozac[]>(environment.apiUrl + '/Transport/manu/driverAll');
     }
 
-    driverJobsNum(idDriver: number): Observable<Number> {
-        return this.http.get<Number>(environment.apiUrl + '/Transport/manu/driverJobsNum/' + idDriver);
+    driverJobsNum(idDriver: number): Observable<number> {
+        return this.http.get<number>(environment.apiUrl + '/Transport/manu/driverJobsNum/' + idDriver);
     }
 
     driverJobs(page: number, perPage: number, sortBy: string, idDriver: number): Observable<Isporuka[]> {

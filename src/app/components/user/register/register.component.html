@@ -9,15 +9,15 @@
             <!-- CONTENT -->
             <div class="p-fluid">
                 <div class="mb-2">
-                    <p [hidden]="!invalidCred" [ngClass]="invalidCred ? 'p-invalid' : ''">Korisničko ime nije ispravno ili već postoji</p>
+                    <p [hidden]="!invalidCred" [ngClass]="invalidCred ? 'ng-invalid' : ''">Korisničko ime nije ispravno ili već postoji</p>
                 </div>
-                <div class="p-field">
+                <div class="field">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                        <input type="text" pInputText [(ngModel)]="this.username" placeholder="Username" style="width: 100%" [ngClass]="invalidCred ? 'p-invalid' : ''" />
+                        <input type="text" pInputText [(ngModel)]="this.username" placeholder="Username" style="width: 100%" [ngClass]="invalidCred ? 'ng-invalid' : ''" />
                     </div>
                 </div>
-                <div class="p-field">
+                <div class="field">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
                         <input type="password" pPassword [(ngModel)]="this.password" style="width: 100%" />
@@ -56,9 +56,9 @@
                     <!-- CONTENT -->
                     <div class="p-fluid">
                         <div class="mb-2">
-                            <p [hidden]="!invalidReg" [ngClass]="invalidReg ? 'p-invalid' : ''">Popunite sva polja!</p>
+                            <p [hidden]="!invalidReg" [ngClass]="invalidReg ? 'ng-invalid' : ''">Popunite sva polja!</p>
                         </div>
-                        <div class="p-field">
+                        <div class="field">
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
                                 <input
@@ -67,26 +67,26 @@
                                     [(ngModel)]="this.nazivFirme"
                                     placeholder="Naziv firme"
                                     style="width: 100%"
-                                    [ngClass]="invalidReg ? 'p-invalid' : ''"
+                                    [ngClass]="invalidReg ? 'ng-invalid' : ''"
                                 />
                             </div>
                         </div>
-                        <div class="p-field">
+                        <div class="field">
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-directions"></i></span>
-                                <input type="text" pInputText [(ngModel)]="this.sediste" placeholder="Adresa firme" style="width: 100%" [ngClass]="invalidReg ? 'p-invalid' : ''" />
+                                <input type="text" pInputText [(ngModel)]="this.sediste" placeholder="Adresa firme" style="width: 100%" [ngClass]="invalidReg ? 'ng-invalid' : ''" />
                             </div>
                         </div>
-                        <div class="p-field">
+                        <div class="field">
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                                <input type="email" pInputText [(ngModel)]="this.email" placeholder="E-mail" style="width: 100%" email [ngClass]="invalidReg ? 'p-invalid' : ''" />
+                                <input type="email" pInputText [(ngModel)]="this.email" placeholder="E-mail" style="width: 100%" email [ngClass]="invalidReg ? 'ng-invalid' : ''" />
                             </div>
                         </div>
-                        <div class="p-field">
+                        <div class="field">
                             <div class="p-inputgroup">
                                 <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
-                                <input type="tel" pInputText [(ngModel)]="this.telefon" placeholder="Telefon/Fax" style="width: 100%" [ngClass]="invalidReg ? 'p-invalid' : ''" />
+                                <input type="tel" pInputText [(ngModel)]="this.telefon" placeholder="Telefon/Fax" style="width: 100%" [ngClass]="invalidReg ? 'ng-invalid' : ''" />
                             </div>
                         </div>
                     </div>

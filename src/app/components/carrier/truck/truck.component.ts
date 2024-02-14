@@ -1,7 +1,7 @@
-import { CarrService } from 'src/app/services/carr/carr.service';
+import { CarrService } from './../../../services/carr/carr.service';
 import { SelectItem, MessageService } from 'primeng/api';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Kamion } from 'src/app/interfaces/model/kamion';
+import { Kamion } from './../../../interfaces/model/kamion';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -74,12 +74,12 @@ export class TruckComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
-        if (this.subscription4 != null) this.subscription4.unsubscribe();
-        if (this.subscription5 != null) this.subscription5.unsubscribe();
-        if (this.subscription6 != null) this.subscription6.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription4 != null) this.subscription4.unsubscribe();
+      if(this.subscription5 != null) this.subscription5.unsubscribe();
+      if(this.subscription6 != null) this.subscription6.unsubscribe();
     }
 
     onSortChange(event): void {
@@ -98,12 +98,12 @@ export class TruckComponent implements OnInit, OnDestroy {
 
     displayCreate(): void {
         this.displayCreateDialog = true;
-        this.dialogFieldModel = null;
-        this.dialogFieldTip = null;
-        this.dialogFieldGodiste = null;
-        this.dialogFieldNosivost = null;
-        this.dialogFieldKm = null;
-        this.dialogFieldSlika = null;
+        this.dialogFieldModel = null!;
+        this.dialogFieldTip = null!;
+        this.dialogFieldGodiste = null!;
+        this.dialogFieldNosivost = null!;
+        this.dialogFieldKm = null!;
+        this.dialogFieldSlika = null!;
     }
 
     hideCreate(): void {

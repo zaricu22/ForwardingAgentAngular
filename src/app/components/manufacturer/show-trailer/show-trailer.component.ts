@@ -1,5 +1,5 @@
 import { ManuService } from './../../../services/manu/manu.service';
-import { CarrService } from 'src/app/services/carr/carr.service';
+import { CarrService } from './../../../services/carr/carr.service';
 import { SelectItem } from 'primeng/api';
 import { Prikolica } from './../../../interfaces/model/prikolica';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -49,9 +49,9 @@ export class ShowTrailerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
     }
 
     onSortChange(event): void {

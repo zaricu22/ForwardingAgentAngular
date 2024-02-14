@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { Role } from 'src/app/enums/role.enum';
+import { AuthService } from './../../../services/auth/auth.service';
+import { Role } from './../../../enums/role.enum';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -38,8 +38,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
     }
 
     greskaToast(): void {

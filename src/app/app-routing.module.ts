@@ -14,7 +14,7 @@ import { CreateDeliveryComponent } from './components/manufacturer/create-delive
 import { ShowTruckComponent } from './components/manufacturer/show-truck/show-truck.component';
 import { ShowTrailerComponent } from './components/manufacturer/show-trailer/show-trailer.component';
 import { Role } from './enums/role.enum';
-import { JobsComponent } from './components/carrier/driver/jobs/jobs.component';
+import { JobsComponent } from './components/carrier/jobs/jobs.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },

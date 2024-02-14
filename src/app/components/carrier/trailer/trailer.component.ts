@@ -1,7 +1,7 @@
-import { CarrService } from 'src/app/services/carr/carr.service';
+import { CarrService } from './../../../services/carr/carr.service';
 import { SelectItem, MessageService } from 'primeng/api';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Prikolica } from 'src/app/interfaces/model/prikolica';
+import { Prikolica } from './../../../interfaces/model/prikolica';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -73,12 +73,12 @@ export class TrailerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
-        if (this.subscription4 != null) this.subscription4.unsubscribe();
-        if (this.subscription5 != null) this.subscription5.unsubscribe();
-        if (this.subscription6 != null) this.subscription6.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription4 != null) this.subscription4.unsubscribe();
+      if(this.subscription5 != null) this.subscription5.unsubscribe();
+      if(this.subscription6 != null) this.subscription6.unsubscribe();
     }
 
     onSortChange(event): void {

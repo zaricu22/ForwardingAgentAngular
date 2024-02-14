@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from './../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Role } from '../../../enums/role.enum';
 import { Subscription } from 'rxjs';
-import { AuthToken } from 'src/app/services/auth/auth-token';
+import { AuthToken } from './../../../services/auth/auth-token';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.authService.unflagLogPage();
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
+        if(this.subscription1 != null) this.subscription1.unsubscribe();
     }
 
     greskaToast(): void {

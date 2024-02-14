@@ -20,7 +20,7 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { UiprimengModule } from './modules/uiprimeng/uiprimeng.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JobsComponent } from './components/carrier/driver/jobs/jobs.component';
+import { JobsComponent } from './components/carrier/jobs/jobs.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 

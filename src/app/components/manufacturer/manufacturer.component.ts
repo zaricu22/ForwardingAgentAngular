@@ -1,4 +1,4 @@
-import { ManuService } from 'src/app/services/manu/manu.service';
+import { ManuService } from './../../services/manu/manu.service';
 import { Proizvodjac } from './../../interfaces/model/proizvodjac';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -82,9 +82,9 @@ export class ManufacturerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
-        if (this.subscription4 != null) this.subscription4.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription4 != null) this.subscription4.unsubscribe();
     }
 }

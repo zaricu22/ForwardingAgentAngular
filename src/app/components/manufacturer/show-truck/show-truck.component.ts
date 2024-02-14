@@ -48,9 +48,9 @@ export class ShowTruckComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
     }
 
     onSortChange(event): void {

@@ -1,15 +1,16 @@
 <!-- DATAVIEW -->
-<p-dataView [value]="trailerArray" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
+<p-dataView [value]="trailerArray" [paginator]=true [rows]="5" [lazy]=true (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
     <!-- DATAVIEW HEADER -->
     <p-header>
         <div class="d-flex">
             <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSort" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
-            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> {{ totalRecords }} </span>
+            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> Ukupno: {{ totalRecords }} </span>
             <button pButton type="button" class="p-button-rounded p-button-info btn-circle align-self-center" icon="pi pi-plus" (click)="displayCreate()"></button>
         </div>
     </p-header>
     <!-- DATAVIEW LIST -->
-    <ng-template let-trailer let-rowIndexValue="rowIndex" pTemplate="listItem">
+    <ng-template pTemplate="list">
+      <div *ngFor="let trailer of trailerArray; index as rowIndexValue">
         <div class="w-100">
             <div class="d-flex flex-wrap p-3">
                 <div class="order-1 order-md-1 item-width">
@@ -44,68 +45,69 @@
                 </div>
             </div>
         </div>
+      </div>
     </ng-template>
 </p-dataView>
 
 <!-- CREATE DIALOG -->
-<p-dialog [(visible)]="displayCreateDialog" [modal]="true" class="dialog-width">
+<p-dialog [(visible)]="displayCreateDialog" [modal]=true class="dialog-width">
     <p-header> Dodavanje </p-header>
     <!-- CONTENT FORM -->
     <div class="p-fluid">
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Model </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldModel" required />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldModel" [required] />
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Tip </strong> </label> <br />
-            <p-dropdown [options]="trailerCategories" [(ngModel)]="dialogFieldTip" placeholder="Tip Prikolice" required></p-dropdown>
+            <p-dropdown [options]="trailerCategories" [(ngModel)]="dialogFieldTip" placeholder="Tip Prikolice" [required]></p-dropdown>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Godiste </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
                 [min]="2000"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodiste"
-                required
+                [required]
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Nosivost </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
                 [min]="0"
                 [max]="100"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldNosivost"
-                required
+                [required]
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Km </strong> </label> <br />
             <p-inputNumber
                 [min]="0"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldKm"
-                required
+                [required]
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Slika </strong> </label> <br />
             <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
@@ -122,40 +124,40 @@
 </p-dialog>
 
 <!-- EDIT DIALOG -->
-<p-dialog [(visible)]="displayEditDialog" [modal]="true" class="dialog-width">
+<p-dialog [(visible)]="displayEditDialog" [modal]=true class="dialog-width">
     <p-header> Izmena </p-header>
     <!-- CONTENT FORM -->
     <div class="p-fluid">
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Model </strong> </label> <br />
             <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldModel" />
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Tip </strong> </label> <br />
             <p-dropdown [options]="trailerCategories" [(ngModel)]="dialogFieldTip"></p-dropdown>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Godiste </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
                 [min]="2000"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodiste"
-                required
+                [required]
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Nosivost </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
                 [min]="0"
                 [max]="100"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
@@ -164,11 +166,11 @@
                 [(ngModel)]="dialogFieldNosivost"
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Km </strong> </label> <br />
             <p-inputNumber
                 [min]="0"
-                [showButtons]="true"
+                [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
                 decrementButtonIcon="pi pi-angle-down"
@@ -177,7 +179,7 @@
                 [(ngModel)]="dialogFieldKm"
             ></p-inputNumber>
         </div>
-        <div class="p-field">
+        <div class="field">
             <label> <strong> Slika </strong> </label> <br />
             <input id="cf4" type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
@@ -194,7 +196,7 @@
 </p-dialog>
 
 <!-- REMOVE DIALOG -->
-<p-dialog [(visible)]="displayRemoveDialog" [modal]="true" class="dialog-width">
+<p-dialog [(visible)]="displayRemoveDialog" [modal]=true class="dialog-width">
     <p-header> Brisanje </p-header>
     <strong> Da li sigurno želite da obrišete? </strong>
     <p-footer>

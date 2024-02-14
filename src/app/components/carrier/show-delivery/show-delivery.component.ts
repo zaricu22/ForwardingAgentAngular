@@ -1,7 +1,7 @@
-import { CarrService } from 'src/app/services/carr/carr.service';
+import { CarrService } from './../../../services/carr/carr.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Isporuka } from 'src/app/interfaces/model/isporuka';
+import { Isporuka } from './../../../interfaces/model/isporuka';
 
 @Component({
     selector: 'app-show-delivery',
@@ -26,6 +26,6 @@ export class ShowDeliveryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
     }
 }

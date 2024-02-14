@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-12 col-md-8 p-4">
         <div class="d-flex flex-column border-1 border border-secondary rounded" style="background-color: #ebe9e9">
-            <h4 class="border-1 border border-secondary rounded-top">Isporuke</h4>
+            <h4 class="border-1 border border-secondary rounded-top"> Isporuke </h4>
+            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> Ukupno: {{ deliveries.length }}</span>
             <div *ngFor="let delivery of deliveries; let i = index">
                 <div class="row align-items-center">
                     <div class="col-4 lead text-center">

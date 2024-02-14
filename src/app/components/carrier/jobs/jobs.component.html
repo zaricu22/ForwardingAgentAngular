@@ -1,13 +1,14 @@
 <!-- DATAVIEW -->
-<p-dataView [value]="driverJobsArray" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
+<p-dataView [value]="driverJobsArray" [paginator]=true [rows]="5" [lazy]=true (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
     <p-header>
         <div class="d-flex">
             <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSort" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
-            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> {{ totalRecords }} </span>
+            <span class="p-badge p-badge-l p-badge-info mx-auto align-self-center"> Ukupno: {{ totalRecords }} </span>
             <p-dropdown [options]="driverOptions" [(ngModel)]="selectedDriverId" placeholder="Izbor Vozača" (onChange)="onDriverChange($event)"></p-dropdown>
         </div>
     </p-header>
-    <ng-template let-job let-rowIndexValue="rowIndex" pTemplate="listItem">
+    <ng-template pTemplate="list">
+      <div *ngFor="let job of driverJobsArray; index as rowIndexValue">
         <div class="w-100">
             <div class="d-flex flex-wrap p-3">
                 <div class="item-width">
@@ -67,5 +68,6 @@
                 </div>
             </div>
         </div>
+      </div>
     </ng-template>
 </p-dataView>

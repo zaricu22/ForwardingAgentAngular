@@ -1,13 +1,13 @@
-import { Prikolica } from 'src/app/interfaces/model/prikolica';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Prikolica } from './../../interfaces/model/prikolica';
+import { AuthService } from './../../services/auth/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Kamion } from 'src/app/interfaces/model/kamion';
-import { Vozac } from 'src/app/interfaces/model/vozac';
-import { Prevoznik } from 'src/app/interfaces/model/prevoznik';
-import { Isporuka } from 'src/app/interfaces/model/isporuka';
+import { Kamion } from './../../interfaces/model/kamion';
+import { Vozac } from './../../interfaces/model/vozac';
+import { Prevoznik } from './../../interfaces/model/prevoznik';
+import { Isporuka } from './../../interfaces/model/isporuka';
 
 @Injectable({
     providedIn: 'root'

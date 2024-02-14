@@ -1,8 +1,8 @@
-import { Isporuka } from './../../../../interfaces/model/isporuka';
+import { Isporuka } from '../../../interfaces/model/isporuka';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { ManuService } from 'src/app/services/manu/manu.service';
-import { Vozac } from 'src/app/interfaces/model/vozac';
+import { ManuService } from '../../../services/manu/manu.service';
+import { Vozac } from '../../../interfaces/model/vozac';
 import { __await } from 'tslib';
 import { Subscription } from 'rxjs';
 
@@ -60,13 +60,13 @@ export class JobsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
-        if (this.subscription4 != null) this.subscription4.unsubscribe();
-        if (this.subscription5 != null) this.subscription5.unsubscribe();
-        if (this.subscription6 != null) this.subscription6.unsubscribe();
-        if (this.subscription7 != null) this.subscription7.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription4 != null) this.subscription4.unsubscribe();
+      if(this.subscription5 != null) this.subscription5.unsubscribe();
+      if(this.subscription6 != null) this.subscription6.unsubscribe();
+      if(this.subscription7 != null)  this.subscription7.unsubscribe();
     }
 
     onSortChange(event): void {

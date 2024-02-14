@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Vozac } from 'src/app/interfaces/model/vozac';
+import { Vozac } from './../../../interfaces/model/vozac';
 import { SelectItem, MessageService } from 'primeng/api';
-import { CarrService } from 'src/app/services/carr/carr.service';
-import { Kamion } from 'src/app/interfaces/model/kamion';
-import { Prikolica } from 'src/app/interfaces/model/prikolica';
+import { CarrService } from './../../../services/carr/carr.service';
+import { Kamion } from './../../../interfaces/model/kamion';
+import { Prikolica } from './../../../interfaces/model/prikolica';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,8 +20,8 @@ export class DriverComponent implements OnInit, OnDestroy {
     trailerArray: Array<Prikolica> = [];
     displayTrailerList: boolean;
     displayTruckList: boolean;
-    selectedTrucks: Array<Kamion> = [];
-    selectedTrailers: Array<Prikolica> = [];
+    selectedTrucks: Array<Kamion> ;
+    selectedTrailers: Array<Prikolica> ;
 
     totalRecords: number;
     sortOptions: SelectItem[];
@@ -76,19 +76,18 @@ export class DriverComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
-        if (this.subscription3 != null) this.subscription3.unsubscribe();
-        if (this.subscription4 != null) this.subscription4.unsubscribe();
-        if (this.subscription5 != null) this.subscription5.unsubscribe();
-        if (this.subscription6 != null) this.subscription6.unsubscribe();
-        if (this.subscription7 != null) this.subscription7.unsubscribe();
-        if (this.subscription8 != null) this.subscription8.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      if(this.subscription4 != null) this.subscription4.unsubscribe();
+      if(this.subscription5 != null) this.subscription5.unsubscribe();
+      if(this.subscription6 != null) this.subscription6.unsubscribe();
+      if(this.subscription7 != null) this.subscription7.unsubscribe();
+      if(this.subscription8 != null) this.subscription8.unsubscribe();
     }
 
     onSortChange(event): void {
         this.sortBy = event.value;
-
         this.subscription2 = this.carrService.driverPage(this.page, this.rowsPerPage, this.sortBy, this.idCarrier).subscribe((res) => {
             this.driverArray = res;
         });
@@ -192,7 +191,7 @@ export class DriverComponent implements OnInit, OnDestroy {
         let kamion: Kamion;
         let prikolica: Prikolica;
         if (this.selectedTrucks != null) kamion = this.selectedTrucks[0];
-        else kamion = null;
+        else kamion = null!;
         if (this.selectedTrailers != null) prikolica = this.selectedTrailers[0];
         else prikolica = null;
         let driver: Vozac = {

@@ -1,9 +1,10 @@
 <!-- DATAVIEW -->
-<p-dataView [value]="trailers" [paginator]="true" [rows]="5" [lazy]="true" (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
+<p-dataView [value]="trailers" [paginator]=true [rows]="5" [lazy]=true (onLazyLoad)="lazyData($event)" [totalRecords]="totalRecords">
     <p-header>
         <p-dropdown [options]="sortOptions" [(ngModel)]="selectedSort" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
     </p-header>
-    <ng-template let-trailer let-rowIndexValue="rowIndex" pTemplate="listItem">
+    <ng-template pTemplate="list">
+      <div *ngFor="let trailer of trailers; index as rowIndexValue">
         <div class="w-100">
             <div class="d-flex flex-wrap p-3">
                 <div class="order-1 order-md-1 item-width">
@@ -38,10 +39,11 @@
                 </div>
             </div>
         </div>
+      </div>
     </ng-template>
 </p-dataView>
 
-<p-overlayPanel #op showCloseIcon="true">
+<p-overlayPanel #op [showCloseIcon]=true>
     <ng-template pTemplate>
         <div>
             <b> Naziv: </b> {{ trailers[selectedRow].prevoznik.naziv }} <br />
@@ -59,13 +61,13 @@
             (
             <span class="text-info">
                 {{
-                    (trailers[selectedRow].prevoznik.uspesneIsporuke / (trailers[selectedRow].prevoznik.uspesneIsporuke + trailers[selectedRow].prevoznik.neuspesneIsporuke)) * 100
+                    (trailers[selectedRow].prevoznik.uspesneIsporuke / (trailers[selectedRow].prevoznik.uspesneIsporuke + trailers[selectedRow].prevoznik.neuspesneIsporuke)) * 100 | number : '1.0-2'
                 }}%
             </span>
             )
             <br />
             <div class="mt-2">
-                <p-rating [ngModel]="carrierStars" readonly="true" [cancel]="false"></p-rating>
+                <p-rating [ngModel]="carrierStars" [readonly]=true [cancel]=false></p-rating>
             </div>
         </div>
     </ng-template>

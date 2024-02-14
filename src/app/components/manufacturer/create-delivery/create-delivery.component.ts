@@ -1,7 +1,7 @@
-import { ManuService } from 'src/app/services/manu/manu.service';
+import { ManuService } from './../../../services/manu/manu.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Teret } from 'src/app/interfaces/model/teret';
-import { Isporuka } from 'src/app/interfaces/model/isporuka';
+import { Teret } from './../../../interfaces/model/teret';
+import { Isporuka } from './../../../interfaces/model/isporuka';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -32,7 +32,7 @@ export class CreateDeliveryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
+      if(this.subscription1 != null) this.subscription1.unsubscribe();
+      if(this.subscription2 != null) this.subscription2.unsubscribe();
     }
 }

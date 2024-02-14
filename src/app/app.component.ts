@@ -55,8 +55,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
 
     ngOnDestroy(): void {
-        if (this.subscription1 != null) this.subscription1.unsubscribe();
-        if (this.subscription2 != null) this.subscription2.unsubscribe();
+        this.subscription1!.unsubscribe();
+        this.subscription2!.unsubscribe();
     }
 
     ngAfterViewChecked() {
