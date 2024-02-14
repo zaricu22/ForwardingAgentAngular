@@ -1,5 +1,7 @@
 # ForwardingAgentAngular
 
+GiHub Pages: https://zaricu22.github.io/ForwardingAgentAngular
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
 
 ## Development server
