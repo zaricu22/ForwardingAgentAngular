@@ -11,7 +11,7 @@ import { Isporuka } from './../../../interfaces/model/isporuka';
 export class ShowDeliveryComponent implements OnInit, OnDestroy {
     idCarrier: number;
 
-    deliveries: Array<Isporuka>;
+    deliveries: Array<Isporuka> = [];
 
     subscription1: Subscription;
 

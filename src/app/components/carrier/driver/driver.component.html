@@ -13,8 +13,8 @@
             <div class="d-flex flex-wrap p-3">
                 <div class="order-1 order-md-1 item-width my-auto">
                     <div class="driver-img">
-                        <img src="driver.slika" *ngIf="driver.slika != null" width="96px" height="96px" />
-                        <img src="../../../../assets/images/Driver.svg" width="96px" height="96px" *ngIf="driver.slika == null" />
+                        <img src="driver.slika" *ngIf="driver.slika" width="96px" height="96px" />
+                        <img src="../../../../assets/images/Driver.svg" width="96px" height="96px" *ngIf="!driver.slika" />
                     </div>
                 </div>
                 <div class="order-3 order-md-2 item-width mt-3 mt-md-0 d-flex flex-column">
@@ -31,7 +31,7 @@
                     <div>{{ driver.km }} km</div>
                 </div>
                 <div class="order-2 order-md-4 item-width my-auto d-flex">
-                    <div class="my-auto" *ngIf="driver.kamion != null || driver.prikolica != null">
+                    <div class="my-auto" *ngIf="driver.kamion || driver.prikolica">
                         <h6>Vozila</h6>
                         <button pButton type="button" class="p-button-info mx-1" icon="pi pi-share-alt" (click)="op.toggle($event); changeSelected(rowIndexValue)"></button>
                     </div>
@@ -77,7 +77,7 @@
             <label> <strong> Godine Iskustva </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
-                [min]="2000"
+                [min]="0"
                 [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
@@ -117,23 +117,23 @@
             ></p-inputNumber>
         </div>
         <div class="field">
-            <label> <strong> Slika </strong> </label> <br />
-            <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+            <label> <strong> Slika (URL) </strong> </label> <br />
+            <input type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
         <div class="field">
             <label> <strong> Kamion </strong> </label> <br />
             <button pButton type="button" label="Izaberi..." (click)="truckList()"></button>
-            <span class="text-danger" *ngIf="selectedTrucks != null && selectedTrucks[0] != null">
+            <span class="text-danger" *ngIf="selectedTrucks && selectedTrucks[0]">
                 ({{ selectedTrucks[0].model }} - {{ selectedTrucks[0].tip }})
-                <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = null" class="p-button-text p-button-rounded p-button-danger"></button>
+                <button pButton type="button" icon="pi pi-times" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
         </div>
         <div class="field">
             <label> <strong> Prikolica </strong> </label> <br />
             <button pButton type="button" label="Izaberi..." (click)="trailerList()"></button>
-            <span class="text-danger" *ngIf="selectedTrailers != null && selectedTrailers[0] != null">
+            <span class="text-danger" *ngIf="selectedTrailers && selectedTrailers[0]">
                 ({{ selectedTrailers[0].model }} - {{ selectedTrailers[0].tip }})
-                <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = null" class="p-button-text p-button-rounded p-button-danger"></button>
+                <button pButton type="button" icon="pi pi-times" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
         </div>
     </div>
@@ -220,12 +220,12 @@
         </div>
         <div class="field">
             <label> <strong> Slika </strong> </label> <br />
-            <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+            <input type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
         <div class="field">
             <label> <strong> Kamion </strong> </label> <br />
             <button pButton type="button" label="Izaberi..." (click)="truckList()"></button>
-            <span class="text-danger" *ngIf="selectedTrucks != null && selectedTrucks[0] != null">
+            <span class="text-danger" *ngIf="selectedTrucks && selectedTrucks[0]">
                 ({{ selectedTrucks[0].model }} - {{ selectedTrucks[0].tip }})
                 <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = null" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
@@ -233,7 +233,7 @@
         <div class="field">
             <label> <strong> Prikolica </strong> </label> <br />
             <button pButton type="button" label="Izaberi..." (click)="trailerList()"></button>
-            <span class="text-danger" *ngIf="selectedTrailers != null && selectedTrailers[0] != null">
+            <span class="text-danger" *ngIf="selectedTrailers && selectedTrailers[0]">
                 ({{ selectedTrailers[0].model }} - {{ selectedTrailers[0].tip }})
                 <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = null" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
@@ -269,8 +269,8 @@
     <p-orderList [value]="truckArray" [(selection)]="selectedTrucks">
         <ng-template let-truck pTemplate="item">
             <div class="d-flex">
-                <img src="truck.slika" *ngIf="truck.slika != null" width="96px" height="96px" />
-                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="truck.slika == null" />
+                <img src="truck.slika" *ngIf="truck.slika" width="96px" height="96px" />
+                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!truck.slika" />
                 <div>
                     <b>Model:</b> {{ truck.model }} <br />
                     <b>Tip:</b> {{ truck.tip }} <br />
@@ -289,38 +289,13 @@
     </p-footer>
 </p-dialog>
 
-<!-- TRAILER LIST DIALOG -->
-<p-dialog [(visible)]="displayTrailerList" [modal]=true>
-    <p-orderList [value]="trailerArray" [(selection)]="selectedTrailers">
-        <ng-template let-trailer pTemplate="item">
-            <div class="d-flex">
-                <img src="trailer.slika" *ngIf="trailer.slika != null" width="96px" height="96px" />
-                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="trailer.slika == null" />
-                <div>
-                    <b>Model:</b> {{ trailer.model }} <br />
-                    <b>Tip:</b> {{ trailer.tip }} <br />
-                    <b>Nosivost:</b> {{ trailer.nosivost }} <br />
-                    <b>Km:</b> {{ trailer.km }} <br />
-                </div>
-            </div>
-        </ng-template>
-    </p-orderList>
-    <p-footer>
-        <div class="d-flex">
-            <div class="ml-auto">
-                <button pButton type="button" class="p-button-outlined p-button-info" label="Zatvori" (click)="hideTrailerList()"></button>
-            </div>
-        </div>
-    </p-footer>
-</p-dialog>
-
 <!-- OVERLAYPANEL -->
 <p-overlayPanel #op [showCloseIcon]=true>
     <ng-template pTemplate>
-        <div *ngIf="driverArray[selectedRow] != null && driverArray[selectedRow].kamion != null" class="d-flex">
+        <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].kamion" class="d-flex">
             <div class="truck-img">
-                <img src="driverArray[selectedRow].kamion.slika" *ngIf="driverArray[selectedRow].kamion.slika != null" width="96px" height="96px" />
-                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="driverArray[selectedRow].kamion.slika == null" />
+                <img src="driverArray[selectedRow].kamion.slika" *ngIf="driverArray[selectedRow].kamion.slika" width="96px" height="96px" />
+                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].kamion.slika" />
             </div>
             <div class="pl-3">
                 <b>Model:</b> {{ driverArray[selectedRow].kamion.model }} <br />
@@ -329,10 +304,10 @@
                 <b>Km:</b> {{ driverArray[selectedRow].kamion.km }} <br />
             </div>
         </div>
-        <div *ngIf="driverArray[selectedRow] != null && driverArray[selectedRow].prikolica != null" class="d-flex mt-3">
+        <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].prikolica" class="d-flex mt-3">
             <div class="trailer-img">
-                <img src="driverArray[selectedRow].prikolica.slika" *ngIf="driverArray[selectedRow].prikolica.slika != null" width="96px" height="96px" />
-                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="driverArray[selectedRow].prikolica.slika == null" />
+                <img src="driverArray[selectedRow].prikolica.slika" *ngIf="driverArray[selectedRow].prikolica.slika" width="96px" height="96px" />
+                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].prikolica.slika" />
             </div>
             <div class="pl-3">
                 <b>Model:</b> {{ driverArray[selectedRow].prikolica.model }} <br />

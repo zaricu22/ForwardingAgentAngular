@@ -15,8 +15,8 @@
             <div class="d-flex flex-wrap p-3">
                 <div class="order-1 order-md-1 item-width">
                     <div class="trailer-img">
-                        <img src="trailer.slika" *ngIf="trailer.slika != null" width="96px" height="96px" />
-                        <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="trailer.slika == null" />
+                        <img src="trailer.slika" *ngIf="trailer.slika" width="96px" height="96px" />
+                        <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!trailer.slika" />
                     </div>
                 </div>
                 <div class="order-3 order-md-2 item-width mt-3 mt-md-0">
@@ -109,7 +109,7 @@
         </div>
         <div class="field">
             <label> <strong> Slika </strong> </label> <br />
-            <input id="cf4" type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+            <input type="url" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
     </div>
     <!-- FOOTER BUTTONS -->
@@ -181,7 +181,7 @@
         </div>
         <div class="field">
             <label> <strong> Slika </strong> </label> <br />
-            <input id="cf4" type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldSlika" />
         </div>
     </div>
     <!-- FOOTER BUTTONS -->

@@ -3,11 +3,11 @@
         <header>
             <img src="../assets/images/industry.png" class="w-100 bg-dark" />
             <div class="avatar mx-auto border-1 border border-secondary rounded-circle bg-white" style="width: 7rem; height: 7rem">
-                <img src="manufacturer.slika" style="width: 7rem; height: 7rem" *ngIf="manufacturer != null && manufacturer.slika != null" />
-                <img src="../assets/images/Factory.svg" style="width: 7rem; height: 7rem" *ngIf="manufacturer != null && manufacturer.slika == null" />
+                <img src="manufacturer.slika" style="width: 7rem; height: 7rem" *ngIf="manufacturer && manufacturer.slika" />
+                <img src="../assets/images/Factory.svg" style="width: 7rem; height: 7rem" *ngIf="manufacturer && !manufacturer.slika" />
             </div>
         </header>
-        <div class="d-flex flex-column p-2 lead" *ngIf="manufacturer != null">
+        <div class="d-flex flex-column p-2 lead" *ngIf="manufacturer">
             <div class="d-flex text-center">
                 <div class="w-50">
                     <i class="fa fa-building"></i>

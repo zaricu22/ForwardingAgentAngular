@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
 export class CreateDeliveryComponent implements OnInit, OnDestroy {
     idManufacturer: number;
 
-    cargos: Array<Teret>;
-    deliveries: Array<Isporuka>;
+    cargos: Array<Teret> = [];
+    deliveries: Array<Isporuka> = [];
 
     subscription1: Subscription;
     subscription2: Subscription;

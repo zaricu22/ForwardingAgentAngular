@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, AfterViewChecked, AfterContentChecked} from '@angular/core';
 import { Vozac } from './../../../interfaces/model/vozac';
 import { SelectItem, MessageService } from 'primeng/api';
 import { CarrService } from './../../../services/carr/carr.service';
@@ -20,8 +20,8 @@ export class DriverComponent implements OnInit, OnDestroy {
     trailerArray: Array<Prikolica> = [];
     displayTrailerList: boolean;
     displayTruckList: boolean;
-    selectedTrucks: Array<Kamion> ;
-    selectedTrailers: Array<Prikolica> ;
+    selectedTrucks: Array<Kamion> = [];
+    selectedTrailers: Array<Prikolica> = [];
 
     totalRecords: number;
     sortOptions: SelectItem[];
@@ -73,6 +73,18 @@ export class DriverComponent implements OnInit, OnDestroy {
         this.subscription1 = this.carrService.driverNum(this.idCarrier).subscribe((res) => {
             this.totalRecords = res;
         });
+
+      if (this.truckArray.length == 0) {
+        this.subscription4 = this.carrService.truckAll(this.idCarrier).subscribe((res) => {
+          console.log('USAO ' + res.length)
+          this.truckArray = res;
+        });
+      }
+      if (this.trailerArray.length == 0) {
+        this.subscription5 = this.carrService.trailerAll(this.idCarrier).subscribe((res) => {
+          this.trailerArray = res;
+        });
+      }
     }
 
     ngOnDestroy(): void {
@@ -105,12 +117,9 @@ export class DriverComponent implements OnInit, OnDestroy {
         this.selectedRow = rowIndex;
     }
 
-    truckList(): void {
+  truckList(): void {
         if (this.truckArray.length == 0) {
-            this.subscription4 = this.carrService.truckAll(this.idCarrier).subscribe((res) => {
-                this.truckArray = res;
-                this.displayTruckList = true;
-            });
+            this.displayTruckList = true;
         } else {
             this.displayTruckList = true;
         }
@@ -122,10 +131,7 @@ export class DriverComponent implements OnInit, OnDestroy {
 
     trailerList(): void {
         if (this.trailerArray.length == 0) {
-            this.subscription5 = this.carrService.trailerAll(this.idCarrier).subscribe((res) => {
-                this.trailerArray = res;
                 this.displayTrailerList = true;
-            });
         } else {
             this.displayTrailerList = true;
         }
