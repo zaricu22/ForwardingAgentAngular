@@ -39,8 +39,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
     landingPage: boolean = false;
     selectedMenuItem: number = 1;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
 
     constructor(private authService: AuthService, private cdRef: ChangeDetectorRef, private router: Router) {}
 
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.toggleFlag = true;
     }
 
-    closeSideBar(event): void {
+    closeSideBar(): void {
         // toggleFlag da ne bi ponistavao toggle button posto se racuna kao izvan menija
         if (!this.toggleFlag && this.sidebarDisplayed) {
             this.sidebarCarrShow = false;

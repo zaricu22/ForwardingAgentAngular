@@ -14,7 +14,6 @@ export class TransportAppInterceptor implements HttpInterceptor {
             });
             request = authReq;
         }
-        console.log('INTERCEPTOR: Authorization ' + request.headers.get('Authorization'));
         return next.handle(request);
     }
 }

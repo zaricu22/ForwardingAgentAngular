@@ -50,19 +50,27 @@ export class AuthService {
     }
 
     getToken(): string {
-        if (localStorage.getItem('TOKEN') != null) return JSON.parse(localStorage.getItem('TOKEN')).value;
+        if (localStorage.getItem('TOKEN') != null)
+          return JSON.parse(localStorage.getItem('TOKEN') as string).value
+        return '';
     }
 
     getRole(): string {
-        if (localStorage.getItem('TOKEN') != null) return JSON.parse(localStorage.getItem('TOKEN')).role;
+        if (localStorage.getItem('TOKEN') != null)
+          return JSON.parse(localStorage.getItem('TOKEN') as string).role
+        return '';
     }
 
     getUsername(): string {
-        if (localStorage.getItem('TOKEN') != null) return JSON.parse(localStorage.getItem('TOKEN')).username;
+        if (localStorage.getItem('TOKEN') != null)
+          return JSON.parse(localStorage.getItem('TOKEN') as string).username;
+      return '';
     }
 
     getIdPreduzeca(): number {
-        if (localStorage.getItem('TOKEN') != null) return JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        if (localStorage.getItem('TOKEN') != null)
+          return JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
+      return 0;
     }
 
     flagLogPage() {

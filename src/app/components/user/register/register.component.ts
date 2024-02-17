@@ -18,18 +18,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     prvaStrana: boolean = true;
     odabranoPreduzece: boolean = true;
-    username: string;
-    password: string;
-    nazivFirme: string;
-    sediste: string;
-    email: string;
-    telefon: string;
+    username: string = '';
+    password: string = '';
+    nazivFirme: string = '';
+    sediste: string = '';
+    email: string = '';
+    telefon: string = '';
 
-    items: MenuItem[];
+    items: MenuItem[] = [];
     activeIndex: number = 0;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
 
     constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {}
 
@@ -38,8 +38,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
     }
 
     greskaToast(): void {
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     register(): void {
-        let role: string;
+        let role: string = '';
         if (this.odabranoPreduzece) role = Role.Manufacturer;
         else role = Role.Carrier;
         if (

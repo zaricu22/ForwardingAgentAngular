@@ -56,17 +56,17 @@
     <div class="p-fluid">
         <div class="field">
             <label> <strong> Model </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldModel" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldModel" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Tip </strong> </label> <br />
-            <p-dropdown [options]="truckCategories" [(ngModel)]="dialogFieldTip" placeholder="Tip Vozila" [required]></p-dropdown>
+            <p-dropdown [options]="truckCategories" [(ngModel)]="dialogFieldTip" placeholder="Tip Vozila" [attr.required]></p-dropdown>
         </div>
         <div class="field">
             <label> <strong> Godiste </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
-                [min]="2000"
+                [min]="0"
                 [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
@@ -74,7 +74,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodiste"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -90,7 +90,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldNosivost"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -104,7 +104,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldKm"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -140,7 +140,7 @@
             <label> <strong> Godiste </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
-                [min]="2000"
+                [min]="0"
                 [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
@@ -148,7 +148,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodiste"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">

@@ -1,11 +1,11 @@
 import { Prevoznik } from './prevoznik';
 export interface Prikolica {
-    idPrikolica: number;
+    idPrikolica: number | null;
     model: string;
     tip: string;
     godinaProizvodnje: number;
     nosivost: number;
     km: number;
-    slika: string;
-    prevoznik: Prevoznik;
+    slika: string | null;
+    prevoznik: Prevoznik | null;
 }

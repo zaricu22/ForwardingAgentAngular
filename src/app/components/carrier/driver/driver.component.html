@@ -53,19 +53,19 @@
     <div class="p-fluid">
         <div class="field">
             <label> <strong> Ime </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Prezime </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Adresa </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Telefon </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Datum Pridruzivanja </strong> </label> <br />
@@ -85,7 +85,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodineIskustva"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -99,7 +99,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldSatiVoznje"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -113,7 +113,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldKm"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -155,19 +155,19 @@
     <div class="p-fluid">
         <div class="field">
             <label> <strong> Ime </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldIme" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Prezime </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldPrezime" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Adresa </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldAdresa" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Telefon </strong> </label> <br />
-            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" [required] />
+            <input type="text" pInputText style="width: 100%" [(ngModel)]="dialogFieldTelefon" [attr.required] />
         </div>
         <div class="field">
             <label> <strong> Datum Pridruzivanja </strong> </label> <br />
@@ -179,7 +179,7 @@
             <label> <strong> Godine Iskustva </strong> </label> <br />
             <p-inputNumber
                 class="btn-inputNum"
-                [min]="2000"
+                [min]="0"
                 [showButtons]=true
                 buttonLayout="stacked"
                 decrementButtonClass="p-button-info"
@@ -187,7 +187,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldGodineIskustva"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -201,7 +201,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldSatiVoznje"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -215,7 +215,7 @@
                 incrementButtonClass="p-button-info"
                 incrementButtonIcon="pi pi-angle-up"
                 [(ngModel)]="dialogFieldKm"
-                [required]
+                [attr.required]
             ></p-inputNumber>
         </div>
         <div class="field">
@@ -227,7 +227,7 @@
             <button pButton type="button" label="Izaberi..." (click)="truckList()"></button>
             <span class="text-danger" *ngIf="selectedTrucks && selectedTrucks[0]">
                 ({{ selectedTrucks[0].model }} - {{ selectedTrucks[0].tip }})
-                <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = null" class="p-button-text p-button-rounded p-button-danger"></button>
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrucks = []" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
         </div>
         <div class="field">
@@ -235,7 +235,7 @@
             <button pButton type="button" label="Izaberi..." (click)="trailerList()"></button>
             <span class="text-danger" *ngIf="selectedTrailers && selectedTrailers[0]">
                 ({{ selectedTrailers[0].model }} - {{ selectedTrailers[0].tip }})
-                <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = null" class="p-button-text p-button-rounded p-button-danger"></button>
+                <button pButton type="button" icon="pi pi-times" (click)="selectedTrailers = []" class="p-button-text p-button-rounded p-button-danger"></button>
             </span>
         </div>
     </div>
@@ -294,26 +294,26 @@
     <ng-template pTemplate>
         <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].kamion" class="d-flex">
             <div class="truck-img">
-                <img src="driverArray[selectedRow].kamion.slika" *ngIf="driverArray[selectedRow].kamion.slika" width="96px" height="96px" />
-                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].kamion.slika" />
+                <img src="driverArray[selectedRow].kamion!.slika" *ngIf="driverArray[selectedRow].kamion!.slika" width="96px" height="96px" />
+                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].kamion!.slika" />
             </div>
             <div class="pl-3">
-                <b>Model:</b> {{ driverArray[selectedRow].kamion.model }} <br />
-                <b>Tip:</b> {{ driverArray[selectedRow].kamion.tip }} <br />
-                <b>Nosivost:</b> {{ driverArray[selectedRow].kamion.nosivost }} <br />
-                <b>Km:</b> {{ driverArray[selectedRow].kamion.km }} <br />
+                <b>Model:</b> {{ driverArray[selectedRow].kamion!.model }} <br />
+                <b>Tip:</b> {{ driverArray[selectedRow].kamion!.tip }} <br />
+                <b>Nosivost:</b> {{ driverArray[selectedRow].kamion!.nosivost }} <br />
+                <b>Km:</b> {{ driverArray[selectedRow].kamion!.km }} <br />
             </div>
         </div>
         <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].prikolica" class="d-flex mt-3">
             <div class="trailer-img">
-                <img src="driverArray[selectedRow].prikolica.slika" *ngIf="driverArray[selectedRow].prikolica.slika" width="96px" height="96px" />
-                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].prikolica.slika" />
+                <img src="driverArray[selectedRow].prikolica!.slika" *ngIf="driverArray[selectedRow].prikolica!.slika" width="96px" height="96px" />
+                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].prikolica!.slika" />
             </div>
             <div class="pl-3">
-                <b>Model:</b> {{ driverArray[selectedRow].prikolica.model }} <br />
-                <b>Tip:</b> {{ driverArray[selectedRow].prikolica.tip }} <br />
-                <b>Nosivost:</b> {{ driverArray[selectedRow].prikolica.nosivost }} <br />
-                <b>Km:</b> {{ driverArray[selectedRow].prikolica.km }} <br />
+                <b>Model:</b> {{ driverArray[selectedRow].prikolica!.model }} <br />
+                <b>Tip:</b> {{ driverArray[selectedRow].prikolica!.tip }} <br />
+                <b>Nosivost:</b> {{ driverArray[selectedRow].prikolica!.nosivost }} <br />
+                <b>Km:</b> {{ driverArray[selectedRow].prikolica!.km }} <br />
             </div>
         </div>
     </ng-template>

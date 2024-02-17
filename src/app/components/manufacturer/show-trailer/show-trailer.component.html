@@ -35,7 +35,7 @@
                 </div>
                 <div class="order-2 order-md-4 item-width my-auto d-flex flex-column align-items-end text-center">
                     <div class="mr-3"><b>Prevoznik</b> <br /></div>
-                    <button pButton type="button" label="{{ trailer.prevoznik.naziv }}" (click)="showDialog(rowIndexValue); op.toggle($event)" class="p-button-link"></button>
+                    <button pButton type="button" label="{{ trailer.prevoznik!.naziv }}" (click)="showDialog(rowIndexValue); op.toggle($event)" class="p-button-link"></button>
                 </div>
             </div>
         </div>
@@ -46,22 +46,22 @@
 <p-overlayPanel #op [showCloseIcon]=true>
     <ng-template pTemplate>
         <div>
-            <b> Naziv: </b> {{ trailers[selectedRow].prevoznik.naziv }} <br />
-            <b> Sediste: </b> {{ trailers[selectedRow].prevoznik.sediste }} <br />
-            <b> E-mail: </b> {{ trailers[selectedRow].prevoznik.email }} <br />
-            <b> Telefon: </b> {{ trailers[selectedRow].prevoznik.telefon }} <br />
+            <b> Naziv: </b> {{ trailers[selectedRow].prevoznik!.naziv }} <br />
+            <b> Sediste: </b> {{ trailers[selectedRow].prevoznik!.sediste }} <br />
+            <b> E-mail: </b> {{ trailers[selectedRow].prevoznik!.email }} <br />
+            <b> Telefon: </b> {{ trailers[selectedRow].prevoznik!.telefon }} <br />
             <b> Reputacija isporuka:</b>
             <span class="text-success">
-                {{ trailers[selectedRow].prevoznik.uspesneIsporuke }}
+                {{ trailers[selectedRow].prevoznik!.uspesneIsporuke }}
             </span>
             /
             <span class="text-danger">
-                {{ trailers[selectedRow].prevoznik.neuspesneIsporuke }}
+                {{ trailers[selectedRow].prevoznik!.neuspesneIsporuke }}
             </span>
             (
             <span class="text-info">
                 {{
-                    (trailers[selectedRow].prevoznik.uspesneIsporuke / (trailers[selectedRow].prevoznik.uspesneIsporuke + trailers[selectedRow].prevoznik.neuspesneIsporuke)) * 100 | number : '1.0-2'
+                    (trailers[selectedRow].prevoznik!.uspesneIsporuke / (trailers[selectedRow].prevoznik!.uspesneIsporuke + trailers[selectedRow].prevoznik!.neuspesneIsporuke)) * 100 | number : '1.0-2'
                 }}%
             </span>
             )

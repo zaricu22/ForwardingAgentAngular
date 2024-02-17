@@ -2,11 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strictPropertyInitialization": false,
-    "strictNullChecks": false,
-    "noImplicitReturns": false,
-    "noImplicitAny": false,
-    "noPropertyAccessFromIndexSignature": false,
+    "allowSyntheticDefaultImports": false,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -28,11 +24,6 @@
     ]
   },
   "angularCompilerOptions": {
-    "strictPropertyInitialization": false,
-    "strictNullChecks": false,
-    "noImplicitReturns": false,
-    "noImplicitAny": false,
-    "noPropertyAccessFromIndexSignature": false,
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

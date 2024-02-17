@@ -4,6 +4,8 @@ import { SelectItem } from 'primeng/api';
 import { Prikolica } from './../../../interfaces/model/prikolica';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import {DataViewLazyLoadEvent} from "primeng/dataview/dataview.interface";
+import {DropdownChangeEvent} from "primeng/dropdown";
 
 @Component({
     selector: 'app-show-trailer',
@@ -11,23 +13,23 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./show-trailer.component.css']
 })
 export class ShowTrailerComponent implements OnInit, OnDestroy {
-    trailers: Prikolica[];
+    trailers: Prikolica[] = [];
 
-    totalRecords: number;
-    sortOptions: SelectItem[];
-    selectedSort: string;
+    totalRecords: number = 0;
+    sortOptions: SelectItem[] = [];
+    selectedSort: string = '';
 
-    page: number;
-    rowsPerPage: number;
-    sortBy: string;
+    page: number = 0;
+    rowsPerPage: number = 0;
+    sortBy: string = '';
 
     selectedRow: number = 0;
 
-    carrierStars: number;
+    carrierStars: number = 0;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
 
     constructor(private manuService: ManuService) {}
 
@@ -49,19 +51,19 @@ export class ShowTrailerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
     }
 
-    onSortChange(event): void {
+    onSortChange(event: DropdownChangeEvent): void {
         this.sortBy = event.value;
         this.subscription2 = this.manuService.trailerPage(this.page, this.rowsPerPage, this.sortBy).subscribe((res) => {
             this.trailers = res;
         });
     }
 
-    lazyData(event): void {
+    lazyData(event: DataViewLazyLoadEvent): void {
         this.page = event.first / this.rowsPerPage;
         this.subscription3 = this.manuService.trailerPage(this.page, this.rowsPerPage, this.sortBy).subscribe((res) => {
             this.trailers = res;
@@ -71,8 +73,8 @@ export class ShowTrailerComponent implements OnInit, OnDestroy {
     showDialog(rowIndexValue: number) {
         this.selectedRow = rowIndexValue;
         this.carrierStars =
-            (this.trailers[this.selectedRow].prevoznik.uspesneIsporuke /
-                (this.trailers[this.selectedRow].prevoznik.uspesneIsporuke + this.trailers[this.selectedRow].prevoznik.neuspesneIsporuke)) *
+            (this.trailers[this.selectedRow].prevoznik!.uspesneIsporuke /
+                (this.trailers[this.selectedRow].prevoznik!.uspesneIsporuke + this.trailers[this.selectedRow].prevoznik!.neuspesneIsporuke)) *
             5;
     }
 }

@@ -9,17 +9,17 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./manufacturer.component.css']
 })
 export class ManufacturerComponent implements OnInit, OnDestroy {
-    manufacturer: Proizvodjac;
-    idManufacturer: number;
+    manufacturer: Proizvodjac | null = null;
+    idManufacturer: number = 0;
 
     data: any;
     data2: any;
     data3: any;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
-    subscription4: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
+    subscription4: Subscription = new Subscription;
 
     constructor(private manuService: ManuService) {}
 
@@ -32,7 +32,7 @@ export class ManufacturerComponent implements OnInit, OnDestroy {
             currMonthNames[i] = monthNames[i];
         }
 
-        this.idManufacturer = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idManufacturer = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.manuService.getManufacturer(this.idManufacturer).subscribe((res: Proizvodjac) => {
             this.manufacturer = res;
@@ -82,9 +82,9 @@ export class ManufacturerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
-      if(this.subscription4 != null) this.subscription4.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
+      this.subscription4!.unsubscribe();
     }
 }

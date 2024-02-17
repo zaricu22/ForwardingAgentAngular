@@ -5,6 +5,8 @@ import { ManuService } from '../../../services/manu/manu.service';
 import { Vozac } from '../../../interfaces/model/vozac';
 import { __await } from 'tslib';
 import { Subscription } from 'rxjs';
+import {DataViewLazyLoadEvent} from "primeng/dataview/dataview.interface";
+import {DropdownChangeEvent} from "primeng/dropdown";
 
 @Component({
     selector: 'app-jobs',
@@ -13,24 +15,24 @@ import { Subscription } from 'rxjs';
 })
 export class JobsComponent implements OnInit, OnDestroy {
     driverJobsArray: Array<Isporuka> = [];
-    idCarrier: number;
+    idCarrier: number = 0;
 
-    totalRecords: number;
-    sortOptions: SelectItem[];
+    totalRecords: number = 0;
+    sortOptions: SelectItem[] = [];
     driverOptions: SelectItem[] = [];
     selectedSort: string = 'statusDostave';
-    selectedDriverId: number;
+    selectedDriverId: number = 0;
 
-    page: number;
-    rowsPerPage: number;
+    page: number = 0;
+    rowsPerPage: number = 0;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
-    subscription4: Subscription;
-    subscription5: Subscription;
-    subscription6: Subscription;
-    subscription7: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
+    subscription4: Subscription = new Subscription;
+    subscription5: Subscription = new Subscription;
+    subscription6: Subscription = new Subscription;
+    subscription7: Subscription = new Subscription;
 
     constructor(private manuService: ManuService) {}
 
@@ -50,7 +52,7 @@ export class JobsComponent implements OnInit, OnDestroy {
             { label: 'Mesto dolaska', value: 'mestoDolaska' }
         ];
 
-        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.manuService.driverAll().subscribe((res: Array<Vozac>) => {
             for (let i = 0; i < res.length; i++) {
@@ -60,23 +62,23 @@ export class JobsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
-      if(this.subscription4 != null) this.subscription4.unsubscribe();
-      if(this.subscription5 != null) this.subscription5.unsubscribe();
-      if(this.subscription6 != null) this.subscription6.unsubscribe();
-      if(this.subscription7 != null)  this.subscription7.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
+      this.subscription4!.unsubscribe();
+      this.subscription5!.unsubscribe();
+      this.subscription6!.unsubscribe();
+      this.subscription7!.unsubscribe();
     }
 
-    onSortChange(event): void {
+    onSortChange(event: DropdownChangeEvent): void {
         this.selectedSort = event.value;
         this.subscription2 = this.manuService.driverJobs(this.page, this.rowsPerPage, this.selectedSort, this.selectedDriverId).subscribe((res) => {
             this.driverJobsArray = res;
         });
     }
 
-    onDriverChange(event): void {
+    onDriverChange(event: DropdownChangeEvent): void {
         this.selectedDriverId = event.value;
         this.subscription3 = this.manuService.driverJobsNum(this.selectedDriverId).subscribe((res: number) => {
             this.totalRecords = res;
@@ -86,10 +88,10 @@ export class JobsComponent implements OnInit, OnDestroy {
         });
     }
 
-    lazyData(event): void {
+    lazyData(event: DataViewLazyLoadEvent): void {
         this.page = event.first / this.rowsPerPage;
         this.subscription5 = this.manuService.driverAll().subscribe((res: Array<Vozac>) => {
-            this.selectedDriverId = res[0].idVozac;
+            this.selectedDriverId = res[0].idVozac!;
             this.subscription6 = this.manuService.driverJobs(this.page, this.rowsPerPage, this.selectedSort, this.selectedDriverId).subscribe((res) => {
                 this.driverJobsArray = res;
             });

@@ -5,6 +5,8 @@ import { CarrService } from './../../../services/carr/carr.service';
 import { Kamion } from './../../../interfaces/model/kamion';
 import { Prikolica } from './../../../interfaces/model/prikolica';
 import { Subscription } from 'rxjs';
+import {DataViewLazyLoadEvent} from "primeng/dataview/dataview.interface";
+import {DropdownChangeEvent} from "primeng/dropdown";
 
 @Component({
     selector: 'app-driver',
@@ -14,45 +16,45 @@ import { Subscription } from 'rxjs';
 })
 export class DriverComponent implements OnInit, OnDestroy {
     driverArray: Array<Vozac> = [];
-    idCarrier: number;
+    idCarrier: number = 0;
 
     truckArray: Array<Kamion> = [];
     trailerArray: Array<Prikolica> = [];
-    displayTrailerList: boolean;
-    displayTruckList: boolean;
+    displayTrailerList: boolean = false;
+    displayTruckList: boolean = false;
     selectedTrucks: Array<Kamion> = [];
     selectedTrailers: Array<Prikolica> = [];
 
-    totalRecords: number;
-    sortOptions: SelectItem[];
-    selectedSort: string;
+    totalRecords: number = 0;
+    sortOptions: SelectItem[] = [];
+    selectedSort: string = '';
 
-    page: number;
-    rowsPerPage: number;
-    sortBy: string;
+    page: number = 0;
+    rowsPerPage: number = 0;
+    sortBy: string = '';
 
     selectedRow: number = 0;
-    dialogFieldIme: string;
-    dialogFieldPrezime: string;
-    dialogFieldAdresa: string;
-    dialogFieldTelefon: string;
-    dialogFieldGodineIskustva: number;
-    dialogFieldDatumPridruzivanja: Date;
-    dialogFieldSatiVoznje: number;
-    dialogFieldKm: number;
-    dialogFieldSlika: string;
-    displayCreateDialog: boolean;
-    displayEditDialog: boolean;
-    displayRemoveDialog: boolean;
+    dialogFieldIme: string = '';
+    dialogFieldPrezime: string = '';
+    dialogFieldAdresa: string = '';
+    dialogFieldTelefon: string = '';
+    dialogFieldGodineIskustva: number = 0;
+    dialogFieldDatumPridruzivanja: Date = new Date();
+    dialogFieldSatiVoznje: number = 0;
+    dialogFieldKm: number = 0;
+    dialogFieldSlika: string = '';
+    displayCreateDialog: boolean = false;
+    displayEditDialog: boolean = false;
+    displayRemoveDialog: boolean = false;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
-    subscription4: Subscription;
-    subscription5: Subscription;
-    subscription6: Subscription;
-    subscription7: Subscription;
-    subscription8: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
+    subscription4: Subscription = new Subscription;
+    subscription5: Subscription = new Subscription;
+    subscription6: Subscription = new Subscription;
+    subscription7: Subscription = new Subscription;
+    subscription8: Subscription = new Subscription;
 
     constructor(private carrService: CarrService, private messageService: MessageService) {}
 
@@ -68,7 +70,7 @@ export class DriverComponent implements OnInit, OnDestroy {
             { label: 'KM', value: 'km' }
         ];
 
-        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.carrService.driverNum(this.idCarrier).subscribe((res) => {
             this.totalRecords = res;
@@ -76,7 +78,6 @@ export class DriverComponent implements OnInit, OnDestroy {
 
       if (this.truckArray.length == 0) {
         this.subscription4 = this.carrService.truckAll(this.idCarrier).subscribe((res) => {
-          console.log('USAO ' + res.length)
           this.truckArray = res;
         });
       }
@@ -88,24 +89,24 @@ export class DriverComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
-      if(this.subscription4 != null) this.subscription4.unsubscribe();
-      if(this.subscription5 != null) this.subscription5.unsubscribe();
-      if(this.subscription6 != null) this.subscription6.unsubscribe();
-      if(this.subscription7 != null) this.subscription7.unsubscribe();
-      if(this.subscription8 != null) this.subscription8.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
+      this.subscription4!.unsubscribe();
+      this.subscription5!.unsubscribe();
+      this.subscription6!.unsubscribe();
+      this.subscription7!.unsubscribe();
+      this.subscription8!.unsubscribe();
     }
 
-    onSortChange(event): void {
+    onSortChange(event: DropdownChangeEvent): void {
         this.sortBy = event.value;
         this.subscription2 = this.carrService.driverPage(this.page, this.rowsPerPage, this.sortBy, this.idCarrier).subscribe((res) => {
             this.driverArray = res;
         });
     }
 
-    lazyData(event): void {
+    lazyData(event: DataViewLazyLoadEvent): void {
         this.page = event.first / this.rowsPerPage;
 
         this.subscription3 = this.carrService.driverPage(this.page, this.rowsPerPage, this.sortBy, this.idCarrier).subscribe((res) => {
@@ -143,17 +144,17 @@ export class DriverComponent implements OnInit, OnDestroy {
 
     displayCreate(): void {
         this.displayCreateDialog = true;
-        this.dialogFieldIme = null;
-        this.dialogFieldPrezime = null;
-        this.dialogFieldAdresa = null;
-        this.dialogFieldTelefon = null;
-        this.dialogFieldDatumPridruzivanja = null;
-        this.dialogFieldGodineIskustva = null;
-        this.dialogFieldSatiVoznje = null;
-        this.dialogFieldKm = null;
-        this.dialogFieldSlika = null;
-        this.selectedTrucks = null;
-        this.selectedTrailers = null;
+        this.dialogFieldIme = '';
+        this.dialogFieldPrezime = '';
+        this.dialogFieldAdresa = '';
+        this.dialogFieldTelefon = '';
+        this.dialogFieldDatumPridruzivanja = new Date();
+        this.dialogFieldGodineIskustva = 0;
+        this.dialogFieldSatiVoznje = 0;
+        this.dialogFieldKm = 0;
+        this.dialogFieldSlika = '';
+        this.selectedTrucks = [];
+        this.selectedTrailers = [];
     }
 
     hideCreate(): void {
@@ -173,9 +174,9 @@ export class DriverComponent implements OnInit, OnDestroy {
         this.dialogFieldKm = this.driverArray[rowIndex].km;
         this.dialogFieldSlika = this.driverArray[rowIndex].slika;
         let karray: Array<Kamion> = [];
-        karray[0] = this.driverArray[rowIndex].kamion;
+        karray[0] = this.driverArray[rowIndex].kamion!;
         let parray: Array<Prikolica> = [];
-        parray[0] = this.driverArray[rowIndex].prikolica;
+        parray[0] = this.driverArray[rowIndex].prikolica!;
         this.selectedTrucks = karray;
         this.selectedTrailers = parray;
     }
@@ -194,11 +195,11 @@ export class DriverComponent implements OnInit, OnDestroy {
     }
 
     createDriver(): void {
-        let kamion: Kamion;
-        let prikolica: Prikolica;
-        if (this.selectedTrucks != null) kamion = this.selectedTrucks[0];
+        let kamion: Kamion | null;
+        let prikolica: Prikolica | null;
+        if (this.selectedTrucks.length > 0) kamion = this.selectedTrucks[0];
         else kamion = null!;
-        if (this.selectedTrailers != null) prikolica = this.selectedTrailers[0];
+        if (this.selectedTrailers.length > 0) prikolica = this.selectedTrailers[0];
         else prikolica = null;
         let driver: Vozac = {
             idVozac: null,
@@ -229,14 +230,14 @@ export class DriverComponent implements OnInit, OnDestroy {
     }
 
     updateDriver(): void {
-        let kamion: Kamion;
-        let prikolica: Prikolica;
-        if (this.selectedTrucks != null) kamion = this.selectedTrucks[0];
+        let kamion: Kamion | null;
+        let prikolica: Prikolica | null;
+        if (this.selectedTrucks.length > 0) kamion = this.selectedTrucks[0];
         else kamion = null;
-        if (this.selectedTrailers != null) prikolica = this.selectedTrailers[0];
+        if (this.selectedTrailers.length > 0) prikolica = this.selectedTrailers[0];
         else prikolica = null;
         let driver: Vozac = {
-            idVozac: this.driverArray[this.selectedRow].idVozac,
+            idVozac: this.driverArray[this.selectedRow].idVozac!,
             ime: this.dialogFieldIme,
             prezime: this.dialogFieldPrezime,
             adresa: this.dialogFieldAdresa,
@@ -273,7 +274,7 @@ export class DriverComponent implements OnInit, OnDestroy {
     }
 
     deleteDriver(): void {
-        this.subscription8 = this.carrService.deleteDriver(this.driverArray[this.selectedRow].idVozac).subscribe(
+        this.subscription8 = this.carrService.deleteDriver(this.driverArray[this.selectedRow].idVozac!).subscribe(
             (res: Boolean) => {
                 this.successMessage();
                 this.hideRemove();

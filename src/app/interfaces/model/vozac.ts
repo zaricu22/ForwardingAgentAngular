@@ -3,7 +3,7 @@ import { Kamion } from './kamion';
 import { Prikolica } from './prikolica';
 
 export interface Vozac {
-    idVozac: number;
+    idVozac: number | null;
     ime: string;
     prezime: string;
     adresa: string;
@@ -13,7 +13,7 @@ export interface Vozac {
     satiVoznje: number;
     km: number;
     slika: string;
-    prevoznik: Prevoznik;
-    kamion: Kamion;
-    prikolica: Prikolica;
+    prevoznik: Prevoznik | null;
+    kamion: Kamion | null;
+    prikolica: Prikolica | null;
 }

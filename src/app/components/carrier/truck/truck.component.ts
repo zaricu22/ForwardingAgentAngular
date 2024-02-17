@@ -3,6 +3,8 @@ import { SelectItem, MessageService } from 'primeng/api';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Kamion } from './../../../interfaces/model/kamion';
 import { Subscription } from 'rxjs';
+import {DataViewLazyLoadEvent} from "primeng/dataview/dataview.interface";
+import {DropdownChangeEvent} from "primeng/dropdown";
 
 @Component({
     selector: 'app-truck',
@@ -12,35 +14,35 @@ import { Subscription } from 'rxjs';
 })
 export class TruckComponent implements OnInit, OnDestroy {
     truckArray: Array<Kamion> = [];
-    idCarrier: number;
+    idCarrier: number = 0;
 
-    truckCategories: SelectItem[];
+    truckCategories: SelectItem[] = [];
 
-    totalRecords: number;
-    sortOptions: SelectItem[];
-    selectedSort: string;
+    totalRecords: number = 0;
+    sortOptions: SelectItem[] = [];
+    selectedSort: string = '';
 
-    page: number;
-    rowsPerPage: number;
-    sortBy: string;
+    page: number = 0;
+    rowsPerPage: number = 0;
+    sortBy: string = '';
 
     selectedRow: number = 0;
-    dialogFieldModel: string;
-    dialogFieldTip: string;
-    dialogFieldGodiste: number;
-    dialogFieldNosivost: number;
-    dialogFieldKm: number;
-    dialogFieldSlika: string;
-    displayCreateDialog: boolean;
-    displayEditDialog: boolean;
-    displayRemoveDialog: boolean;
+    dialogFieldModel: string = '';
+    dialogFieldTip: string = '';
+    dialogFieldGodiste: number = 0;
+    dialogFieldNosivost: number = 0;
+    dialogFieldKm: number = 0;
+    dialogFieldSlika: string = '';
+    displayCreateDialog: boolean = false;
+    displayEditDialog: boolean = false;
+    displayRemoveDialog: boolean = false;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
-    subscription4: Subscription;
-    subscription5: Subscription;
-    subscription6: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
+    subscription4: Subscription = new Subscription;
+    subscription5: Subscription = new Subscription;
+    subscription6: Subscription = new Subscription;
 
     constructor(private carrService: CarrService, private messageService: MessageService) {}
 
@@ -66,7 +68,7 @@ export class TruckComponent implements OnInit, OnDestroy {
             { label: 'KM', value: 'km' }
         ];
 
-        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.carrService.truckNum(this.idCarrier).subscribe((res) => {
             this.totalRecords = res;
@@ -74,22 +76,22 @@ export class TruckComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
-      if(this.subscription4 != null) this.subscription4.unsubscribe();
-      if(this.subscription5 != null) this.subscription5.unsubscribe();
-      if(this.subscription6 != null) this.subscription6.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
+      this.subscription4!.unsubscribe();
+      this.subscription5!.unsubscribe();
+      this.subscription6!.unsubscribe();
     }
 
-    onSortChange(event): void {
+    onSortChange(event: DropdownChangeEvent): void {
         this.sortBy = event.value;
         this.subscription2 = this.carrService.truckPage(this.page, this.rowsPerPage, this.sortBy, this.idCarrier).subscribe((res) => {
             this.truckArray = res;
         });
     }
 
-    lazyData(event): void {
+    lazyData(event: DataViewLazyLoadEvent): void {
         this.page = event.first / this.rowsPerPage;
         this.subscription3 = this.carrService.truckPage(this.page, this.rowsPerPage, this.sortBy, this.idCarrier).subscribe((res) => {
             this.truckArray = res;
@@ -98,12 +100,12 @@ export class TruckComponent implements OnInit, OnDestroy {
 
     displayCreate(): void {
         this.displayCreateDialog = true;
-        this.dialogFieldModel = null!;
-        this.dialogFieldTip = null!;
-        this.dialogFieldGodiste = null!;
-        this.dialogFieldNosivost = null!;
-        this.dialogFieldKm = null!;
-        this.dialogFieldSlika = null!;
+        this.dialogFieldModel = '';
+        this.dialogFieldTip = '';
+        this.dialogFieldGodiste = 0;
+        this.dialogFieldNosivost = 0;
+        this.dialogFieldKm = 0;
+        this.dialogFieldSlika = '';
     }
 
     hideCreate(): void {
@@ -118,7 +120,7 @@ export class TruckComponent implements OnInit, OnDestroy {
         this.dialogFieldGodiste = this.truckArray[rowIndex].godinaProizvodnje;
         this.dialogFieldNosivost = this.truckArray[rowIndex].nosivost;
         this.dialogFieldKm = this.truckArray[rowIndex].km;
-        this.dialogFieldSlika = this.truckArray[rowIndex].slika;
+        this.dialogFieldSlika = this.truckArray[rowIndex].slika!;
     }
 
     hideEdit(): void {
@@ -187,7 +189,7 @@ export class TruckComponent implements OnInit, OnDestroy {
     }
 
     deleteTruck(): void {
-        this.subscription6 = this.carrService.deleteTruck(this.truckArray[this.selectedRow].idKamion).subscribe(
+        this.subscription6 = this.carrService.deleteTruck(this.truckArray[this.selectedRow].idKamion!).subscribe(
             (res: Boolean) => {
                 this.successMessage();
                 this.hideRemove();

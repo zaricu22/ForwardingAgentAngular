@@ -9,24 +9,24 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./carrier.component.css']
 })
 export class CarrierComponent implements OnInit, OnDestroy {
-    carrier: Prevoznik;
-    idCarrier: number;
+    carrier: Prevoznik | null = null;
+    idCarrier: number = 0;
 
     data: any;
     data2: any;
     data3: any;
     data4: any;
 
-    subscription1: Subscription;
-    subscription2: Subscription;
-    subscription3: Subscription;
-    subscription4: Subscription;
-    subscription5: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
+    subscription3: Subscription = new Subscription;
+    subscription4: Subscription = new Subscription;
+    subscription5: Subscription = new Subscription;
 
     constructor(private carrService: CarrService) {}
 
     ngOnInit(): void {
-        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idCarrier = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.carrService.getCarrier(this.idCarrier).subscribe((res: Prevoznik) => {
             this.carrier = res;
@@ -96,10 +96,10 @@ export class CarrierComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
-      if(this.subscription3 != null) this.subscription3.unsubscribe();
-      if(this.subscription4 != null) this.subscription4.unsubscribe();
-      if(this.subscription5 != null) this.subscription5.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
+      this.subscription3!.unsubscribe();
+      this.subscription4!.unsubscribe();
+      this.subscription5!.unsubscribe();
     }
 }

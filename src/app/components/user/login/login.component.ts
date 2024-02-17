@@ -13,12 +13,12 @@ import { AuthToken } from './../../../services/auth/auth-token';
     providers: [MessageService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    username: string;
-    password: string;
+    username: string = '';
+    password: string = '';
 
     invalidLogin: boolean = false;
 
-    subscription1: Subscription;
+    subscription1: Subscription = new Subscription;
 
     constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {}
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.authService.unflagLogPage();
-        if(this.subscription1 != null) this.subscription1.unsubscribe();
+        this.subscription1!.unsubscribe();
     }
 
     greskaToast(): void {

@@ -18,6 +18,7 @@
         </div>
         <div class="field">
             <button class="mt-3" pButton *ngIf="!this.isLogged()" label="Prijavi se" icon="pi pi-sign-in" (click)="this.login()"></button>
+            <p *ngIf="this.isLogged()" style="color: red">Prijavljeni ste!</p>
         </div>
         <a [routerLink]="['/register']"> Otvorite novi nalog </a>
     </p-card>

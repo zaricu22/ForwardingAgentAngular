@@ -10,18 +10,18 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./create-delivery.component.css']
 })
 export class CreateDeliveryComponent implements OnInit, OnDestroy {
-    idManufacturer: number;
+    idManufacturer: number = 0;
 
     cargos: Array<Teret> = [];
     deliveries: Array<Isporuka> = [];
 
-    subscription1: Subscription;
-    subscription2: Subscription;
+    subscription1: Subscription = new Subscription;
+    subscription2: Subscription = new Subscription;
 
     constructor(private manuService: ManuService) {}
 
     ngOnInit(): void {
-        this.idManufacturer = JSON.parse(localStorage.getItem('TOKEN')).idPreduzeca;
+        this.idManufacturer = JSON.parse(localStorage.getItem('TOKEN') as string).idPreduzeca;
 
         this.subscription1 = this.manuService.cargoAll(this.idManufacturer).subscribe((res: Array<Teret>) => {
             this.cargos = res;
@@ -32,7 +32,7 @@ export class CreateDeliveryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      if(this.subscription1 != null) this.subscription1.unsubscribe();
-      if(this.subscription2 != null) this.subscription2.unsubscribe();
+      this.subscription1!.unsubscribe();
+      this.subscription2!.unsubscribe();
     }
 }
