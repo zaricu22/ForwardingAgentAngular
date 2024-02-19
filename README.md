@@ -2,7 +2,7 @@
 
 ## Preview Website
 
-GiHub Pages: https://zaricu22.github.io/ForwardingAgentAngular
+[ForwardingAgent GiHub Pages](https://zaricu22.github.io/ForwardingAgentAngular)  
 (Notice: first API access can delay ~2min because of Render Cloud Free Plan!)
 
 ## Angular CLI
