@@ -14,7 +14,7 @@
                 <div class="order-1 order-md-1 item-width my-auto">
                     <div class="driver-img">
                         <img src="driver.slika" *ngIf="driver.slika" width="96px" height="96px" />
-                        <img src="../../../../assets/images/Driver.svg" width="96px" height="96px" *ngIf="!driver.slika" />
+                        <img src="assets/images/Driver.svg" width="96px" height="96px" *ngIf="!driver.slika" />
                     </div>
                 </div>
                 <div class="order-3 order-md-2 item-width mt-3 mt-md-0 d-flex flex-column">
@@ -270,7 +270,7 @@
         <ng-template let-truck pTemplate="item">
             <div class="d-flex">
                 <img src="truck.slika" *ngIf="truck.slika" width="96px" height="96px" />
-                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!truck.slika" />
+                <img src="assets/images/Truck.svg" width="96px" height="96px" *ngIf="!truck.slika" />
                 <div>
                     <b>Model:</b> {{ truck.model }} <br />
                     <b>Tip:</b> {{ truck.tip }} <br />
@@ -295,7 +295,7 @@
         <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].kamion" class="d-flex">
             <div class="truck-img">
                 <img src="driverArray[selectedRow].kamion!.slika" *ngIf="driverArray[selectedRow].kamion!.slika" width="96px" height="96px" />
-                <img src="../../../../assets/images/Truck.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].kamion!.slika" />
+                <img src="assets/images/Truck.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].kamion!.slika" />
             </div>
             <div class="pl-3">
                 <b>Model:</b> {{ driverArray[selectedRow].kamion!.model }} <br />
@@ -307,7 +307,7 @@
         <div *ngIf="driverArray[selectedRow] && driverArray[selectedRow].prikolica" class="d-flex mt-3">
             <div class="trailer-img">
                 <img src="driverArray[selectedRow].prikolica!.slika" *ngIf="driverArray[selectedRow].prikolica!.slika" width="96px" height="96px" />
-                <img src="../../../../assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].prikolica!.slika" />
+                <img src="assets/images/Trailer.svg" width="96px" height="96px" *ngIf="!driverArray[selectedRow].prikolica!.slika" />
             </div>
             <div class="pl-3">
                 <b>Model:</b> {{ driverArray[selectedRow].prikolica!.model }} <br />
